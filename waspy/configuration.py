@@ -51,6 +51,9 @@ class Config:
         if self.default_options is None:
             self._load_config()
 
+    def as_dict(self):
+        return dict(self.default_options)
+
     def _load_config(self, filepath=None):
         if filepath is None:
             if CONFIG_LOCATION is None:

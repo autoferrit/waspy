@@ -36,9 +36,21 @@ def test_get_config_file(config):
     assert config['wasp']['setting1'] == 1
 
 
+def test_get_config_as_dict(config):
+    assert isinstance(config.as_dict(), dict)
+
+
 def test_get_file_subsection(config):
     assert config['database']['username'] == 'normal_user'
     assert config['database']['migration']['username'] == 'migration_user'
+
+
+def test_get_file_sub_section_as_dict(config):
+    assert isinstance(config['wasp'].as_dict(), dict)
+
+
+def test_get_file_sub_section_as_dict_value(config):
+    assert config['database'].as_dict().get('username') == 'normal_user'
 
 
 def test_get_file_flat(config):
@@ -82,6 +94,5 @@ def test_get_flat_with_underscores(config):
 def test_get_flat_with_underscores_envvar(config, monkeypatch):
     monkeypatch.setenv('FLAT_WITH_UNDERSCORES', 'blarg')
     assert config['flat_with_underscores'] == 'blarg'
-
 
 
